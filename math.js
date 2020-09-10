@@ -657,12 +657,13 @@ Vector.prototype.set = function set(x, y, z) {
     return this.set(x.x, x.y, x.z);
   } else if (x instanceof Array) {
     return this.set(x[0], x[1], x[2]);
-  } else if (typeof y === 'undefined' && typeof x === 'number') {
+  } else if (!(typeof y === 'number') && typeof x === 'number') {
     return this.set(x, x, x);
-  } else {
+  } else if (!(typeof x === 'number')) {
     Diagnostics.log(
       `Vector.set() aborted. Error: Data type not supported; Data provided: ${x}, ${y}, ${z}`
     );
+    return this;
   }
   this.x = x;
   this.y = y;
