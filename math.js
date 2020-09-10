@@ -71,17 +71,17 @@ EulerAngle.prototype.sub = function (x) {
 /** @param { EulerAngle | Array.<Number> | Number= } x * @returns { EulerAngle } Vector */
 EulerAngle.prototype.mul = function (x) {
   if (x instanceof EulerAngle) {
-    this.x *= x.x || 1;
-    this.y *= x.y || 1;
-    this.z *= x.z || 1;
+    this.x *= x.x;
+    this.y *= x.y;
+    this.z *= x.z;
   } else if (x instanceof Array) {
-    this.x *= x[0] || 1;
-    this.y *= x[1] || 1;
-    this.z *= x[2] || 1;
+    this.x *= x[0];
+    this.y *= x[1];
+    this.z *= x[2];
   } else if (typeof x == 'number') {
-    this.x *= x || 1;
-    this.y *= x || 1;
-    this.z *= x || 1;
+    this.x *= x;
+    this.y *= x;
+    this.z *= x;
   }
   return this;
 };
@@ -257,10 +257,10 @@ Quaternion.prototype.sub = function sub(x) {
 Quaternion.prototype.mul = function mul(x) {
   let w2, x2, y2, z2;
   if (x instanceof Quaternion) {
-    w2 = x.w || 0;
-    x2 = x.x || 0;
-    y2 = x.y || 0;
-    z2 = x.z || 0;
+    w2 = x.w;
+    x2 = x.x;
+    y2 = x.y;
+    z2 = x.z;
   } else if (x instanceof EulerAngle) {
     const q = this.add(x.toQuaternion());
     w2 = q.w;
@@ -443,19 +443,19 @@ Vector.prototype.sub = function (x) {
   return this;
 };
 /** @param { Vector | Array.<Number> | Number= } x * @returns { Vector } Vector */
-Vector.prototype.mul = function (x) {
+Vector.prototype.mul = function (x = 1) {
   if (x instanceof Vector) {
-    this.x *= x.x || 1;
-    this.y *= x.y || 1;
-    this.z *= x.z || 1;
+    this.x *= x.x;
+    this.y *= x.y;
+    this.z *= x.z;
   } else if (x instanceof Array) {
-    this.x *= x[0] || 1;
-    this.y *= x[1] || 1;
-    this.z *= x[2] || 1;
-  } else if (typeof x == 'number') {
-    this.x *= x || 1;
-    this.y *= x || 1;
-    this.z *= x || 1;
+    this.x *= x[0];
+    this.y *= x[1];
+    this.z *= x[2];
+  } else if (typeof x === 'number') {
+    this.x *= x;
+    this.y *= x;
+    this.z *= x;
   }
   return this;
 };
@@ -633,17 +633,17 @@ Vector.prototype.copy = function (x) {
 Vector.prototype.equals = function equals(x, y, z) {
   let a, b, c;
   if (x instanceof Vector) {
-    a = x.x || 0;
-    b = x.y || 0;
-    c = x.z || 0;
+    a = x.x;
+    b = x.y;
+    c = x.z;
   } else if (x instanceof Array) {
-    a = x[0] || 0;
-    b = x[1] || 0;
-    c = x[2] || 0;
+    a = x[0];
+    b = x[1];
+    c = x[2];
   } else {
-    a = x || 0;
-    b = y || 0;
-    c = z || 0;
+    a = x;
+    b = y;
+    c = z;
   }
   return this.x === a && this.y === b && this.z === c;
 };
@@ -657,7 +657,7 @@ Vector.prototype.set = function set(x, y, z) {
     return this.set(x.x, x.y, x.z);
   } else if (x instanceof Array) {
     return this.set(x[0], x[1], x[2]);
-  } else if (!(typeof y === 'number') && typeof x === 'number') {
+  } else if (typeof y === 'undefined' && typeof x === 'number') {
     return this.set(x, x, x);
   } else {
     Diagnostics.log(
