@@ -1,0 +1,7 @@
+.DS_STORE
+objects/
+*.json
+*.arproj
+*.arprojbk
+script.js
+physics.js
