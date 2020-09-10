@@ -554,7 +554,7 @@ Vector.prototype.orientation = function orientation() {
 /** @param { Vector | Array } v * @returns { Vector } Vector*/
 Vector.prototype.cross = function cross(v) {
   if (v instanceof Array) {
-    Vector;
+    this.cross(new Vector(v[0], v[1], v[2]));
   }
   const x = this.y * v.z - this.z * v.y;
   const y = this.z * v.x - this.x * v.z;
