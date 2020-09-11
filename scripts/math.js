@@ -19,7 +19,7 @@ const TWO_PI = 6.28318530718;
  * @version 1.0
  * @author Tomas Pietravallo
  */
-export const EulerAngle = function EulerAngle(x, y, z) {
+export const EulerAngle = function EulerAngle(x = 0, y = 0, z = 0) {
   if (x instanceof Array) {
     this.x = x[0];
     this.y = x[1];
@@ -27,44 +27,44 @@ export const EulerAngle = function EulerAngle(x, y, z) {
   } else if (x instanceof Quaternion) {
     return x.toEulerAngles();
   } else {
-    this.x = x || 0;
-    this.y = y || 0;
-    this.z = z || 0;
+    this.x = x;
+    this.y = y;
+    this.z = z;
   }
 };
 /** @param { EulerAngle | Array.<Number> | Number= } x * @returns { EulerAngle } Vector */
 EulerAngle.prototype.add = function (x) {
   if (x instanceof EulerAngle) {
-    this.x += x.x || 0;
-    this.y += x.y || 0;
-    this.z += x.z || 0;
+    this.x += x.x;
+    this.y += x.y;
+    this.z += x.z;
   } else if (x instanceof Quaternion) {
     return this.add(x.toEulerAngles());
   } else if (x instanceof Array) {
-    this.x += x[0] || 0;
-    this.y += x[1] || 0;
-    this.z += x[2] || 0;
+    this.x += x[0];
+    this.y += x[1];
+    this.z += x[2];
   } else if (typeof x == 'number') {
-    this.x += x || 0;
-    this.y += x || 0;
-    this.z += x || 0;
+    this.x += x;
+    this.y += x;
+    this.z += x;
   }
   return this;
 };
 /** @param { EulerAngle | Array.<Number> | Number= } x * @returns { EulerAngle } Vector */
 EulerAngle.prototype.sub = function (x) {
   if (x instanceof EulerAngle) {
-    this.x -= x.x || 0;
-    this.y -= x.y || 0;
-    this.z -= x.z || 0;
+    this.x -= x.x;
+    this.y -= x.y;
+    this.z -= x.z;
   } else if (x instanceof Array) {
-    this.x -= x[0] || 0;
-    this.y -= x[1] || 0;
-    this.z -= x[2] || 0;
+    this.x -= x[0];
+    this.y -= x[1];
+    this.z -= x[2];
   } else if (typeof x == 'number') {
-    this.x -= x || 0;
-    this.y -= x || 0;
-    this.z -= x || 0;
+    this.x -= x;
+    this.y -= x;
+    this.z -= x;
   }
   return this;
 };
@@ -149,9 +149,9 @@ EulerAngle.prototype.fromRadiants = function (x, y, z) {
     this.y = x[1];
     this.z = x[2];
   } else {
-    this.x = x || 0;
-    this.y = y || 0;
-    this.z = z || 0;
+    this.x = x;
+    this.y = y;
+    this.z = z;
   }
 
   this.x *= RAD2DEG;
@@ -197,7 +197,7 @@ EulerAngle.prototype.toString = function () {
  * @version 1.0
  * @author Tomas Pietravallo
  */
-export const Quaternion = function Quaternion(w, x, y, z) {
+export const Quaternion = function Quaternion(w = 1, x = 0, y = 0, z = 0) {
   if (w instanceof Array) {
     this.w = w[0];
     this.x = w[1];
@@ -207,50 +207,50 @@ export const Quaternion = function Quaternion(w, x, y, z) {
     return w.toQuaternion();
   } else {
     this.w = w || 1;
-    this.x = x || 0;
-    this.y = y || 0;
-    this.z = z || 0;
+    this.x = x;
+    this.y = y;
+    this.z = z;
   }
 };
 Quaternion.prototype.add = function add(x) {
   if (x instanceof Quaternion) {
-    this.w += x.w || 0;
-    this.x += x.x || 0;
-    this.y += x.y || 0;
-    this.z += x.z || 0;
+    this.w += x.w;
+    this.x += x.x;
+    this.y += x.y;
+    this.z += x.z;
   } else if (x instanceof EulerAngle) {
     return this.add(x.toQuaternion());
   } else if (x instanceof Array) {
-    this.w += x[0] || 0;
-    this.x += x[1] || 0;
-    this.y += x[2] || 0;
-    this.z += x[3] || 0;
+    this.w += x[0];
+    this.x += x[1];
+    this.y += x[2];
+    this.z += x[3];
   } else if (typeof x == 'number') {
-    this.w += x || 0;
-    this.x += x || 0;
-    this.y += x || 0;
-    this.z += x || 0;
+    this.w += x;
+    this.x += x;
+    this.y += x;
+    this.z += x;
   }
   return this;
 };
 Quaternion.prototype.sub = function sub(x) {
   if (x instanceof Quaternion) {
-    this.w -= x.w || 0;
-    this.x -= x.x || 0;
-    this.y -= x.y || 0;
-    this.z -= x.z || 0;
+    this.w -= x.w;
+    this.x -= x.x;
+    this.y -= x.y;
+    this.z -= x.z;
   } else if (x instanceof EulerAngle) {
     return this.add(x.toQuaternion());
   } else if (x instanceof Array) {
-    this.w -= x[0] || 0;
-    this.x -= x[1] || 0;
-    this.y -= x[2] || 0;
-    this.z -= x[3] || 0;
+    this.w -= x[0];
+    this.x -= x[1];
+    this.y -= x[2];
+    this.z -= x[3];
   } else if (typeof x == 'number') {
-    this.w -= x || 0;
-    this.x -= x || 0;
-    this.y -= x || 0;
-    this.z -= x || 0;
+    this.w -= x;
+    this.x -= x;
+    this.y -= x;
+    this.z -= x;
   }
   return this;
 };
@@ -268,15 +268,15 @@ Quaternion.prototype.mul = function mul(x) {
     y2 = q.y;
     z2 = q.z;
   } else if (x instanceof Array) {
-    w2 = x[0] || 0;
-    x2 = x[1] || 0;
-    y2 = x[2] || 0;
-    z2 = x[3] || 0;
+    w2 = x[0];
+    x2 = x[1];
+    y2 = x[2];
+    z2 = x[3];
   } else if (typeof x == 'number') {
-    w2 = x || 0;
-    x2 = x || 0;
-    y2 = x || 0;
-    z2 = x || 0;
+    w2 = x;
+    x2 = x;
+    y2 = x;
+    z2 = x;
   }
   var w1 = this.w;
   var x1 = this.x;
@@ -401,44 +401,44 @@ Quaternion.prototype.toString = function () {
  * @version 1.0
  * @author Tomas Pietravallo
  */
-export const Vector = function Vector(x, y, z) {
-  this.x = x || 0;
-  this.y = y || 0;
-  this.z = z || 0;
+export const Vector = function Vector(x = 0, y = 0, z = 0) {
+  this.x = x;
+  this.y = y;
+  this.z = z;
 };
 /** 3D or 2D Vector operations */
 // ------------------------------------------------------------- //
 /** @param { Vector | Array.<Number> | Number= } x * @returns { Vector } Vector */
 Vector.prototype.add = function (x) {
   if (x instanceof Vector) {
-    this.x += x.x || 0;
-    this.y += x.y || 0;
-    this.z += x.z || 0;
+    this.x += x.x;
+    this.y += x.y;
+    this.z += x.z;
   } else if (x instanceof Array) {
-    this.x += x[0] || 0;
-    this.y += x[1] || 0;
-    this.z += x[2] || 0;
+    this.x += x[0];
+    this.y += x[1];
+    this.z += x[2];
   } else if (typeof x == 'number') {
-    this.x += x || 0;
-    this.y += x || 0;
-    this.z += x || 0;
+    this.x += x;
+    this.y += x;
+    this.z += x;
   }
   return this;
 };
 /** @param { Vector | Array.<Number> | Number= } x * @returns { Vector } Vector */
 Vector.prototype.sub = function (x) {
   if (x instanceof Vector) {
-    this.x -= x.x || 0;
-    this.y -= x.y || 0;
-    this.z -= x.z || 0;
+    this.x -= x.x;
+    this.y -= x.y;
+    this.z -= x.z;
   } else if (x instanceof Array) {
-    this.x -= x[0] || 0;
-    this.y -= x[1] || 0;
-    this.z -= x[2] || 0;
+    this.x -= x[0];
+    this.y -= x[1];
+    this.z -= x[2];
   } else if (typeof x == 'number') {
-    this.x -= x || 0;
-    this.y -= x || 0;
-    this.z -= x || 0;
+    this.x -= x;
+    this.y -= x;
+    this.z -= x;
   }
   return this;
 };
@@ -597,9 +597,9 @@ Vector.prototype.angleBetween = function angleBetween(x) {
   return angle;
 };
 /** @description 2D Vectors only. Angles in DEGREES * @param { Number } angle * @param { Number } length * @returns { Vector } Vector */
-Vector.prototype.fromAngle = function fromAngle(angle, length) {
-  angle = angle || 0;
-  length = length || 1;
+Vector.prototype.fromAngle = function fromAngle(angle = 0, length = 1) {
+  angle = angle;
+  length = length;
   return new Vector(length * Math.cos(angle), length * Math.sin(angle), 0);
 };
 
