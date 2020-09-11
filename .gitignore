@@ -5,3 +5,4 @@ objects/
 *.arprojbk
 script.js
 physics.js
+tree.js
