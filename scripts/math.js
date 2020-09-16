@@ -647,8 +647,8 @@ Vector.prototype.equals = function equals(x, y, z) {
   }
   return this.x === a && this.y === b && this.z === c;
 };
-/** @returns { Vector } Vector */
-Vector.prototype.setMag = function setMag(n) {
+/** @param { Number } n * @returns { Vector } Vector */
+Vector.prototype.setMag = function setMag(n = 1) {
   return this.normalize().mul(n);
 };
 /** @param { Vector | Array | Number } x * @param { Number= } y * @param { Number= } z * @returns { Vector } Number */
@@ -671,10 +671,20 @@ Vector.prototype.set = function set(x, y, z) {
   return this;
 };
 /** @param { Number } min * @param { Number } max * @returns { Vector } Vector */
-Vector.prototype.clamp = function clamp(min, max) {
+Vector.prototype.clamp = function clamp(min = -1, max = -min) {
   this.x = Math.max(Math.min(this.x, max), min);
   this.y = Math.max(Math.min(this.y, max), min);
   this.z = Math.max(Math.min(this.z, max), min);
+  return this;
+};
+/** @param { Vector } v * @param { Number } amount */
+Vector.prototype.lerp = function lerp(v, amount = 0) {
+  if (!(v instanceof Vector)) {
+    throw `Error in .lerp(): v isn't a Vector`;
+  }
+  this.x += (v.x - this.x) * amount;
+  this.y += (v.y - this.y) * amount;
+  this.z += (v.z - this.z) * amount;
   return this;
 };
 /** @returns { String } String */
