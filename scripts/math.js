@@ -32,7 +32,7 @@ export const EulerAngle = function EulerAngle(x = 0, y = 0, z = 0) {
     this.z = z;
   }
 };
-/** @param { EulerAngle | Array.<Number> | Number= } x * @returns { EulerAngle } Vector */
+/** @param { EulerAngle | Array.<Number> | Number= } x * @returns { EulerAngle } EulerAngle */
 EulerAngle.prototype.add = function (x) {
   if (x instanceof EulerAngle) {
     this.x += x.x;
@@ -51,7 +51,7 @@ EulerAngle.prototype.add = function (x) {
   }
   return this;
 };
-/** @param { EulerAngle | Array.<Number> | Number= } x * @returns { EulerAngle } Vector */
+/** @param { EulerAngle | Array.<Number> | Number= } x * @returns { EulerAngle } EulerAngle */
 EulerAngle.prototype.sub = function (x) {
   if (x instanceof EulerAngle) {
     this.x -= x.x;
@@ -68,7 +68,7 @@ EulerAngle.prototype.sub = function (x) {
   }
   return this;
 };
-/** @param { EulerAngle | Array.<Number> | Number= } x * @returns { EulerAngle } Vector */
+/** @param { EulerAngle | Array.<Number> | Number= } x * @returns { EulerAngle } EulerAngle */
 EulerAngle.prototype.mul = function (x) {
   if (x instanceof EulerAngle) {
     this.x *= x.x;
@@ -85,7 +85,7 @@ EulerAngle.prototype.mul = function (x) {
   }
   return this;
 };
-/** @param { EulerAngle | Array.<Number> | Number } x * @returns { EulerAngle } Vector */
+/** @param { EulerAngle | Array.<Number> | Number } x * @returns { EulerAngle } EulerAngle */
 EulerAngle.prototype.div = function (x) {
   if (x instanceof EulerAngle) {
     if (
