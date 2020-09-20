@@ -32,7 +32,7 @@ export const EulerAngle = function EulerAngle(x = 0, y = 0, z = 0) {
     this.z = z;
   }
 };
-/** @param { EulerAngle | Array.<Number> | Number= } x * @returns { EulerAngle } EulerAngle */
+/** @param { EulerAngle | Array.<Number> | Quaternion | Number= } x * @returns { EulerAngle } EulerAngle */
 EulerAngle.prototype.add = function (x) {
   if (x instanceof EulerAngle) {
     this.x += x.x;
@@ -142,21 +142,19 @@ EulerAngle.prototype.div = function (x) {
     }
   }
 };
-/** @param x { Array.<Number> | Number= } * @param { Number= } y * @param { Number= } z * @returns { EulerAngle } EulerAngle */
-EulerAngle.prototype.fromRadiants = function (x, y, z) {
-  if (x instanceof Array) {
-    this.x = x[0];
-    this.y = x[1];
-    this.z = x[2];
-  } else {
-    this.x = x;
-    this.y = y;
-    this.z = z;
-  }
-
+/** @returns { EulerAngle } EulerAngle */
+EulerAngle.prototype.fromRadiants = function () {
   this.x *= RAD2DEG;
   this.y *= RAD2DEG;
   this.z *= RAD2DEG;
+
+  return this;
+};
+/** @returns { EulerAngle } EulerAngle */
+EulerAngle.prototype.fromDegrees = function () {
+  this.x *= DEG2RAD;
+  this.y *= DEG2RAD;
+  this.z *= DEG2RAD;
 
   return this;
 };
