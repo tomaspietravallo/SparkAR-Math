@@ -589,16 +589,22 @@ Vector.prototype.rotate = function rotate(a) {
 /** @description 2D Vectors only. Angles in DEGREES*/
 Vector.prototype.angleBetween = function angleBetween(x) {
   const dotmagmag = this.dot(x) / (this.mag() * x.mag());
-  let angle;
-  angle = Math.acos(Math.min(1, Math.max(-1, dotmagmag)));
+  let angle = Math.acos(Math.min(1, Math.max(-1, dotmagmag)));
   angle = angle * Math.sign(this.cross(x).z || 1);
   return angle;
 };
 /** @description 2D Vectors only. Angles in DEGREES * @param { Number } angle * @param { Number } length * @returns { Vector } Vector */
 Vector.prototype.fromAngle = function fromAngle(angle = 0, length = 1) {
-  angle = angle;
-  length = length;
-  return new Vector(length * Math.cos(angle), length * Math.sin(angle), 0);
+  this.x = length * Math.cos(angle);
+  this.y = length * Math.sin(angle);
+  this.z = 0;
+  return this;
+};
+/** @description 2D Vectors only. Angles in DEGREES * @param { Vector } target * @returns { Vector } Vector */
+Vector.prototype.lookAt2D = function lookAt2D(target = new Vector()) {
+  let x = this.x - target.x;
+  let y = this.y - target.y;
+  return Vector.fromAngle(Math.atan2(y, x));
 };
 
 // Useful functions
@@ -719,7 +725,7 @@ Vector.prototype._log = function log() {
 // ------------------------------------------------------------- //
 /** @returns { Vector } Vector */
 Vector.random2D = function random2D() {
-  return Vector.prototype.fromAngle(Math.random() * TWO_PI);
+  return new Vector().fromAngle(Math.random() * TWO_PI);
 };
 /** @returns { Vector } Vector */
 Vector.random3D = function random3D() {
@@ -729,4 +735,9 @@ Vector.random3D = function random3D() {
   const vx = vzBase * Math.cos(angle);
   const vy = vzBase * Math.sin(angle);
   return new Vector(vx, vy, vz);
+};
+Vector.fromAngle = function fromAngle(angle = 0, length = 1) {
+  angle = angle;
+  length = length;
+  return new Vector(length * Math.cos(angle), length * Math.sin(angle), 0);
 };
