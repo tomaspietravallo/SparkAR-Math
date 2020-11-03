@@ -500,12 +500,17 @@ Vector.prototype.div = function (x) {
     this.x /= x[0];
     this.y /= x[1];
     this.z /= x[2];
+    return this;
   } else if (typeof x == 'number') {
     if (Number.isFinite(x) && typeof x == 'number') {
       if (x === 0) {
         Diagnostics.log('Vector.div() aborted. Error: divide by 0');
         return this;
       }
+      this.x /= x;
+      this.y /= x;
+      this.z /= x;
+      return this;
     } else {
       Diagnostics.log(
         'Vector.div() aborted. Error: values are either undefined or not finite'
